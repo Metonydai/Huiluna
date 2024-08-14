@@ -4,6 +4,9 @@
     <Filter Include="Huiluna">
       <UniqueIdentifier>{5B8BB5C2-C76A-345E-D082-BF343CE19ABF}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Huiluna\Events">
+      <UniqueIdentifier>{DF82878A-CB50-7B90-B4E4-EBB6A05157F5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Huiluna.h" />
@@ -15,6 +18,18 @@
     </ClInclude>
     <ClInclude Include="src\Huiluna\EntryPoint.h">
       <Filter>Huiluna</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Huiluna\Events\ApplicationEvent.h">
+      <Filter>Huiluna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Huiluna\Events\Event.h">
+      <Filter>Huiluna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Huiluna\Events\KeyEvent.h">
+      <Filter>Huiluna\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Huiluna\Events\MouseEvent.h">
+      <Filter>Huiluna\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Huiluna\Log.h">
       <Filter>Huiluna</Filter>
