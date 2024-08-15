@@ -18,6 +18,9 @@ project "Huiluna"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "hlpch.h"
+    pchsource "Huiluna/src/hlpch.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",

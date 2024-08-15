@@ -1,3 +1,5 @@
+#include <hlpch.h>
+
 #include "Log.h"
 
 namespace Huiluna {

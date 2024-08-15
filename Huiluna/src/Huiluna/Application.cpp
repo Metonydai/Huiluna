@@ -1,3 +1,5 @@
+#include <hlpch.h>
+
 #include "Application.h"
 
 #include "Huiluna/Events/ApplicationEvent.h"
