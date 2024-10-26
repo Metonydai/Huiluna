@@ -10,6 +10,12 @@ workspace "Huiluna"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folders (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Huiluna/vendor/GLFW/include"
+
+include "Huiluna/vendor/GLFW"
+
 project "Huiluna"
     location "Huiluna"
     kind "SharedLib"
@@ -30,7 +36,14 @@ project "Huiluna"
     includedirs
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+        "GLFW",
+        "opengl32.lib"
     }
 
     filter "system:windows"
@@ -46,6 +59,7 @@ project "Huiluna"
 
         postbuildcommands
         {
+            "{MKDIR} ../bin/" .. outputdir .. "/Sandbox",
             ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
         }
     
