@@ -65,14 +65,17 @@ project "Huiluna"
     
     filter "configurations:Debug"
         defines "HL_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "HL_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "HL_DIST"
+        buildoptions "/MD"
         optimize "On"
 
 
@@ -113,13 +116,16 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "HL_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
         defines "HL_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "HL_DIST"
+        buildoptions "/MD"
         optimize "On"
 
