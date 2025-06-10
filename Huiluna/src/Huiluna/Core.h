@@ -10,6 +10,10 @@
 	#error Huiluna only supports Windows!
 #endif
 
+#ifdef HL_DEBUG
+    #define HL_ENABLE_ASSERTS
+#endif
+
 #ifdef HL_ENABLE_ASSERTS
 	#define HL_ASSERT(x, ...) { if(!(x)) { HL_ERROR("Assertion Falied: {0}", __VA_ARGS__); __debugbreak(); } }
 	#define HL_CORE_ASSERT(x, ...) { if(!(x)) { HL_ERROR("Assertion Falied: {0}", __VA_ARGS__); __debugbreak(); } }

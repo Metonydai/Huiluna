@@ -3,9 +3,9 @@
 #include "Core.h"
 
 #include "Window.h"
-#include "Huiluna/LayerStack.h"
+#include "LayerStack.h"
 #include "Events/Event.h"
-#include "Huiluna/Events/ApplicationEvent.h"
+#include "Events/ApplicationEvent.h"
 
 
 namespace Huiluna {
