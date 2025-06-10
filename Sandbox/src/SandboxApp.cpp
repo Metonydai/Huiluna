@@ -10,7 +10,7 @@ public:
 
 	void OnUpdate() override
 	{
-		HL_INFO("ExampleLayer::Update");
+		//HL_INFO("ExampleLayer::Update");
 	}
 
 	void OnEvent(Huiluna::Event& event) override
@@ -25,6 +25,7 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
+		PushLayer(new Huiluna::ImGuiLayer());
 	}
 
 	~Sandbox()

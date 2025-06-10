@@ -13,8 +13,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folders (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Huiluna/vendor/GLFW/include"
+IncludeDir["Glad"] = "Huiluna/vendor/Glad/include"
+IncludeDir["ImGui"] = "Huiluna/vendor/imgui"
 
 include "Huiluna/vendor/GLFW"
+include "Huiluna/vendor/Glad"
+include "Huiluna/vendor/imgui"
 
 project "Huiluna"
     location "Huiluna"
@@ -37,12 +41,16 @@ project "Huiluna"
     {
         "%{prj.name}/src",
         "%{prj.name}/vendor/spdlog/include",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.ImGui}"
     }
 
     links
     {
         "GLFW",
+        "Glad",
+        "ImGui",
         "opengl32.lib"
     }
 
@@ -54,7 +62,8 @@ project "Huiluna"
         defines
         {
             "HL_PLATFORM_WINDOWS",
-            "HL_BUILD_DLL"
+            "HL_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands
