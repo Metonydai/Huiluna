@@ -10,12 +10,20 @@ public:
 
 	void OnUpdate() override
 	{
-		//HL_INFO("ExampleLayer::Update");
+		if (Huiluna::Input::IsKeyPressed(HL_KEY_TAB))
+			HL_TRACE("Tab key is pressed (poll)!");
 	}
 
 	void OnEvent(Huiluna::Event& event) override
 	{
-		HL_TRACE("{0}", event.ToString());
+		if (event.GetEventType() == Huiluna::EventType::KeyPressed)
+		{
+			Huiluna::KeyPressedEvent& e = (Huiluna::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == HL_KEY_TAB)
+				HL_TRACE("Tab key is pressed (event)!");
+			else
+				HL_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
