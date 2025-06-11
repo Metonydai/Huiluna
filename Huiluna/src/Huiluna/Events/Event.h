@@ -6,6 +6,8 @@
 #include <functional>
 #include <sstream>
 
+#include "spdlog/fmt/fmt.h"
+
 namespace Huiluna {
 
 	// Events in Huiluna are currently blocking, meaning when an event occurs it
@@ -85,5 +87,14 @@ namespace Huiluna {
 	{
 		return os << e.ToString();
 	}
+}
+
+namespace fmt {
+	template <>
+	struct formatter<Huiluna::Event> : formatter<std::string> {
+		auto format(const Huiluna::Event& e, format_context& ctx) const {
+			return formatter<std::string>::format(e.ToString(), ctx);
+		}
+	};
 }
 
