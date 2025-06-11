@@ -1,7 +1,5 @@
 #pragma once
 
-#include "hlpch.h"
-
 #include "Core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
