@@ -1,5 +1,7 @@
 #include "Huiluna.h"
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Huiluna::Layer 
 {
 public:
@@ -13,6 +15,7 @@ public:
 		if (Huiluna::Input::IsKeyPressed(HL_KEY_TAB))
 			HL_TRACE("Tab key is pressed (poll)!");
 	}
+
 
 	void OnEvent(Huiluna::Event& event) override
 	{
@@ -33,7 +36,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushLayer(new Huiluna::ImGuiLayer());
 	}
 
 	~Sandbox()
