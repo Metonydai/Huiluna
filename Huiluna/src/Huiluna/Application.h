@@ -10,6 +10,8 @@
 #include "ImGui/ImGuiLayer.h"
 
 #include "Huiluna/Renderer/Shader.h"
+#include "Huiluna/Renderer/VertexArray.h"
+#include "Huiluna/Renderer/Buffer.h"
 
 namespace Huiluna {
 	class HUILUNA_API Application
@@ -35,8 +37,11 @@ namespace Huiluna {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
-		std::unique_ptr<Shader> m_Shader;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<Shader> m_BlueShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 	private:
 		static Application* s_Instance;
 	};
