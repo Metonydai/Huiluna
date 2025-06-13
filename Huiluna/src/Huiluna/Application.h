@@ -13,6 +13,8 @@
 #include "Huiluna/Renderer/VertexArray.h"
 #include "Huiluna/Renderer/Buffer.h"
 
+#include "Renderer/OrthographicCamera.h"
+
 namespace Huiluna {
 	class HUILUNA_API Application
 	{
@@ -42,6 +44,8 @@ namespace Huiluna {
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};
