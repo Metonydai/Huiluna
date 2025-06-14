@@ -3,6 +3,8 @@
 #include "Huiluna/Core.h"
 #include "Huiluna/Events/Event.h"
 
+#include "Huiluna/Core/Timestep.h"
+
 namespace Huiluna {
 
 	class HUILUNA_API Layer
@@ -13,7 +15,7 @@ namespace Huiluna {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

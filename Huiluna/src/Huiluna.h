@@ -6,6 +6,8 @@
 #include "Huiluna/Layer.h"
 #include "Huiluna/Log.h"
 
+#include "Huiluna/Core/Timestep.h"
+
 #include "Huiluna/Input.h"
 #include "Huiluna/KeyCodes.h"
 #include "Huiluna/MouseButtonCodes.h"
