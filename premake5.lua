@@ -24,6 +24,7 @@ IncludeDir["GLFW"] = "Huiluna/vendor/GLFW/include"
 IncludeDir["Glad"] = "Huiluna/vendor/Glad/include"
 IncludeDir["ImGui"] = "Huiluna/vendor/imgui"
 IncludeDir["glm"] = "Huiluna/vendor/glm"
+IncludeDir["stb_image"] = "Huiluna/vendor/stb_image"
 
 include "Huiluna/vendor/GLFW"
 include "Huiluna/vendor/Glad"
@@ -46,6 +47,7 @@ project "Huiluna"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+        "%{prj.name}/vendor/stb_image/**.cpp",
         "%{prj.name}/vendor/glm/glm/**.hpp",
         "%{prj.name}/vendor/glm/glm/**.inl",
     }
@@ -62,7 +64,8 @@ project "Huiluna"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.stb_image}",
     }
 
     links

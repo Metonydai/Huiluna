@@ -20,6 +20,7 @@
 
 #include "Huiluna/Renderer/Buffer.h"
 #include "Huiluna/Renderer/Shader.h"
+#include "Huiluna/Renderer/Texture.h"
 #include "Huiluna/Renderer/VertexArray.h"
 
 #include "Huiluna/Renderer/OrthographicCamera.h"
