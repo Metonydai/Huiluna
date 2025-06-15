@@ -9,6 +9,13 @@ workspace "Huiluna"
         "Dist"
     }
 
+group "Dependencis"
+        project "GLFW"
+        project "Glad"
+        project "ImGui"
+
+group ""
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folders (solution directory)
