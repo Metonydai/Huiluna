@@ -20,7 +20,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Huiluna::VertexBuffer> vertexBuffer;
+		Huiluna::Ref<Huiluna::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Huiluna::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Huiluna::BufferLayout layout = {
@@ -32,7 +32,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Huiluna::IndexBuffer> indexBuffer;
+		Huiluna::Ref<Huiluna::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Huiluna::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -45,7 +45,7 @@ public:
 			-0.5f,  0.5f, 0.0f
 		};
 
-		std::shared_ptr<Huiluna::VertexBuffer> squareVB;
+		Huiluna::Ref<Huiluna::VertexBuffer> squareVB;
 		squareVB.reset(Huiluna::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		squareVB->SetLayout({
@@ -56,7 +56,7 @@ public:
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 
-		std::shared_ptr<Huiluna::IndexBuffer> squareIB;
+		Huiluna::Ref<Huiluna::IndexBuffer> squareIB;
 		squareIB.reset(Huiluna::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 
 		m_SquareVA->SetIndexBuffer(squareIB);
@@ -200,11 +200,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Huiluna::Shader> m_Shader;
-	std::shared_ptr<Huiluna::VertexArray> m_VertexArray;
+	Huiluna::Ref<Huiluna::Shader> m_Shader;
+	Huiluna::Ref<Huiluna::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Huiluna::Shader> m_FlatColorShader;
-	std::shared_ptr<Huiluna::VertexArray> m_SquareVA;
+	Huiluna::Ref<Huiluna::Shader> m_FlatColorShader;
+	Huiluna::Ref<Huiluna::VertexArray> m_SquareVA;
 
 	Huiluna::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
