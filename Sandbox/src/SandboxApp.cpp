@@ -171,6 +171,8 @@ public:
 
 		m_TextureShader.reset(Huiluna::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 		m_MegamiTexture = Huiluna::Texture2D::Create("assets/textures/megami.jpg");
+		m_CheckerboardTexture = Huiluna::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_ChernoLogoTexture = Huiluna::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<Huiluna::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Huiluna::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -220,12 +222,12 @@ public:
 			}
 		}
 
-		m_MegamiTexture->Bind();
-		std::dynamic_pointer_cast<Huiluna::OpenGLShader>(m_TextureShader)->Bind();
-
+		//m_MegamiTexture->Bind();
+		//Huiluna::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_CheckerboardTexture->Bind();
 		Huiluna::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-
-
+		m_ChernoLogoTexture->Bind();
+		Huiluna::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		//Huiluna::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -255,7 +257,7 @@ private:
 	Huiluna::Ref<Huiluna::Shader> m_FlatColorShader, m_TextureShader;
 	Huiluna::Ref<Huiluna::VertexArray> m_SquareVA;
 
-	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture;
+	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture, m_ChernoLogoTexture, m_CheckerboardTexture;
 
 	Huiluna::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
