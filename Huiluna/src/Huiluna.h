@@ -11,6 +11,7 @@
 #include "Huiluna/Input.h"
 #include "Huiluna/KeyCodes.h"
 #include "Huiluna/MouseButtonCodes.h"
+#include "Huiluna/OrthographicCameraController.h"
 
 #include "Huiluna/ImGui/ImGuiLayer.h"
 

@@ -10,7 +10,7 @@ class ExampleLayer : public Huiluna::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 		m_VertexArray.reset(Huiluna::VertexArray::Create());
 
@@ -50,7 +50,7 @@ public:
 
 		squareVB->SetLayout({
 			{ Huiluna::ShaderDataType::Float3, "a_Position" },
-			{ Huiluna::ShaderDataType::Float2, "a_UV" }
+			{ Huiluna::ShaderDataType::Float2, "a_TexCoord" }
 			});
 
 		m_SquareVA->AddVertexBuffer(squareVB);
@@ -103,6 +103,7 @@ public:
 			#version 330 core
 
 			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
 			
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
@@ -146,31 +147,14 @@ public:
 
 	void OnUpdate(Huiluna::Timestep ts) override
 	{
-		if (Huiluna::Input::IsKeyPressed(HL_KEY_LEFT))
-				m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+		// Update
+		m_CameraController.OnUpdate(ts);
 
-		else if (Huiluna::Input::IsKeyPressed(HL_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		if (Huiluna::Input::IsKeyPressed(HL_KEY_UP))
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-
-		else if (Huiluna::Input::IsKeyPressed(HL_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		if (Huiluna::Input::IsKeyPressed(HL_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-
-		if (Huiluna::Input::IsKeyPressed(HL_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-
+		// Render
 		Huiluna::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		Huiluna::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
-
-		Huiluna::Renderer::BeginScene(m_Camera);
+		Huiluna::Renderer::BeginScene(m_CameraController.GetCamera());
 		
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -200,7 +184,6 @@ public:
 		//Huiluna::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Huiluna::Renderer::EndScene();
-
 	}
 
 	void OnImGuiRender()
@@ -210,12 +193,9 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(Huiluna::Event& event) override
+	void OnEvent(Huiluna::Event& e) override
 	{
-	}
-
-	bool OnKeyPressedEvent(Huiluna::KeyPressedEvent& event)
-	{
+		m_CameraController.OnEvent(e);
 	}
 
 private:
@@ -228,11 +208,7 @@ private:
 
 	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture, m_ChernoLogoTexture, m_CheckerboardTexture;
 
-	Huiluna::OrthographicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
-	float m_CameraMoveSpeed = 5.0f;
-	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 180.0f;
+	Huiluna::OrthographicCameraController m_CameraController;
 
 	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 
