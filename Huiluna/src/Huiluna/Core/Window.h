@@ -2,8 +2,8 @@
 
 #include <hlpch.h>
 
-#include "Huiluna/Core.h"
-#include "Huiluna/Log.h"
+#include "Huiluna/Core/Core.h"
+#include "Huiluna/Core/Log.h"
 #include "Huiluna/Events/Event.h"
 
 namespace Huiluna {

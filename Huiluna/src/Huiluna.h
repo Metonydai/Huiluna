@@ -2,16 +2,16 @@
 
 // For use by Huiluna applications
 
-#include "Huiluna/Application.h"
-#include "Huiluna/Layer.h"
-#include "Huiluna/Log.h"
+#include "Huiluna/Core/Application.h"
+#include "Huiluna/Core/Layer.h"
+#include "Huiluna/Core/Log.h"
 
 #include "Huiluna/Core/Timestep.h"
 
-#include "Huiluna/Input.h"
-#include "Huiluna/KeyCodes.h"
-#include "Huiluna/MouseButtonCodes.h"
-#include "Huiluna/OrthographicCameraController.h"
+#include "Huiluna/Core/Input.h"
+#include "Huiluna/Core/KeyCodes.h"
+#include "Huiluna/Core/MouseButtonCodes.h"
+#include "Huiluna/Renderer/OrthographicCameraController.h"
 
 #include "Huiluna/ImGui/ImGuiLayer.h"
 
@@ -28,5 +28,5 @@
 // ------------------------------------
 // 
 // ---Entry Point----------------------
-#include "Huiluna/EntryPoint.h"
+#include "Huiluna/Core/EntryPoint.h"
 // ------------------------------------

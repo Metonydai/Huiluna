@@ -1,8 +1,7 @@
 #include "hlpch.h"
 #include "Buffer.h"
-#include "Huiluna/Log.h"
 
-#include "Renderer.h"
+#include "Huiluna/Renderer/Renderer.h"
 
 #include "Platform/OpenGL/OpenGLBuffer.h"
 

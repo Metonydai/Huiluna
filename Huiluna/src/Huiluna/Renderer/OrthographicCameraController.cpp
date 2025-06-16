@@ -1,10 +1,8 @@
 #include "hlpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Huiluna/Input.h"
-#include "Huiluna/KeyCodes.h"
-
-#include "Log.h"
+#include "Huiluna/Core/Input.h"
+#include "Huiluna/Core/KeyCodes.h"
 
 namespace Huiluna {
 

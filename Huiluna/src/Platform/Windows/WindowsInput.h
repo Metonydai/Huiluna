@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Huiluna/Input.h"
+#include "Huiluna/Core/Input.h"
 
 namespace Huiluna {
 

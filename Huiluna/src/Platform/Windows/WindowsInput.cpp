@@ -1,7 +1,7 @@
 #include "hlpch.h"
 #include "WindowsInput.h"
 
-#include "Huiluna/Application.h"
+#include "Huiluna/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Huiluna {

@@ -1,8 +1,7 @@
 #include "hlpch.h"
 #include "Application.h"
 
-#include "Input.h"
-#include "Huiluna/Log.h"
+#include "Huiluna/Core/Input.h"
 #include "Huiluna/Renderer/Renderer.h"
 
 #include <GLFW/glfw3.h>

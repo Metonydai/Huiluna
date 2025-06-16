@@ -1,5 +1,4 @@
 #include "hlpch.h"
-#include "Huiluna/Log.h"
 #include "OpenGLContext.h"
 
 #include <GLFW/glfw3.h>

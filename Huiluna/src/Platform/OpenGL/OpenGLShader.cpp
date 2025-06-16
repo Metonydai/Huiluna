@@ -1,8 +1,6 @@
 #include "hlpch.h"
 #include "OpenGLShader.h"
 
-#include "Huiluna/Log.h"
-
 #include <fstream> 
 
 #include <glad/glad.h>

@@ -1,8 +1,6 @@
 #pragma once
 
 #include <string>
-#include "Huiluna/Log.h"
-#include "Huiluna/Core.h"
 
 namespace Huiluna {
 

@@ -2,7 +2,7 @@
 
 #include "hlpch.h"
 
-#include "Huiluna/Core.h"
+#include "Huiluna/Core/Core.h"
 #include "Layer.h"
 
 namespace Huiluna {

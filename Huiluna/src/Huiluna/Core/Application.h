@@ -4,12 +4,12 @@
 
 #include "Window.h"
 #include "LayerStack.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
+#include "Huiluna/Events/Event.h"
+#include "Huiluna/Events/ApplicationEvent.h"
 
 #include "Huiluna/Core/Timestep.h"
 
-#include "ImGui/ImGuiLayer.h"
+#include "Huiluna/ImGui/ImGuiLayer.h"
 
 namespace Huiluna {
 	class Application

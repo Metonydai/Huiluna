@@ -1,5 +1,4 @@
 #pragma once
-#include "Huiluna/Log.h"
 
 namespace Huiluna {
 
