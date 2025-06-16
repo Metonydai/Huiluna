@@ -175,7 +175,7 @@ public:
 		auto textureShader = m_ShaderLibrary.Get("Texture");
 
 		//m_MegamiTexture->Bind();
-		//Huiluna::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		//Huiluna::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_CheckerboardTexture->Bind();
 		Huiluna::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_ChernoLogoTexture->Bind();
