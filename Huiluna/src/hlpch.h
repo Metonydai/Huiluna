@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 #include "Huiluna/Core/Log.h"
+#include "Huiluna/Debug/Instrumentor.h"
 
 #ifdef HL_PLATFORM_WINDOWS
 	#include <Windows.h>
