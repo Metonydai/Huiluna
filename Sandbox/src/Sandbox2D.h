@@ -17,11 +17,7 @@ public:
 private:
 	Huiluna::OrthographicCameraController m_CameraController;
 	
-	// Temp
-	Huiluna::Ref<Huiluna::VertexArray> m_SquareVA;
-
-	Huiluna::Ref<Huiluna::Shader> m_FlatColorShader;
-	//Huiluna::Ref<Huiluna::Texture2D> m_Texture;
+	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture, m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
