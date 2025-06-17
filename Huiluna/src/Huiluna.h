@@ -17,6 +17,7 @@
 
 // ---Renderer-------------------------
 #include "Huiluna/Renderer/Renderer.h"
+#include "Huiluna/Renderer/Renderer2D.h"
 #include "Huiluna/Renderer/RenderCommand.h"
 
 #include "Huiluna/Renderer/Buffer.h"
