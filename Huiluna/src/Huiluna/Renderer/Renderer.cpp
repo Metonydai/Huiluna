@@ -10,6 +10,8 @@ namespace Huiluna {
 
 	void Renderer::Init()
 	{
+		HL_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

@@ -20,6 +20,8 @@ namespace Huiluna {
 
 	OpenGLShader::OpenGLShader(const std::string& filepath)
 	{
+		HL_PROFILE_FUNCTION();
+
 		std::string source = ReadFile(filepath);
 		auto shaderSources = PreProcess(source);
 		Compile(shaderSources);
@@ -35,6 +37,8 @@ namespace Huiluna {
 	OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 		: m_Name(name)
 	{
+		HL_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 		shaderSources[GL_VERTEX_SHADER] = vertexSrc;
 		shaderSources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -43,31 +47,43 @@ namespace Huiluna {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		HL_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		HL_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetFloat3(const std::string& name, const glm::vec3& value)
 	{
+		HL_PROFILE_FUNCTION();
+
 		UploadUniformFloat3(name, value);
 	}
 
 	void OpenGLShader::SetFloat4(const std::string& name, const glm::vec4& value)
 	{
+		HL_PROFILE_FUNCTION();
+
 		UploadUniformFloat4(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& value)
 	{
+		HL_PROFILE_FUNCTION();
+
 		UploadUniformMat4(name, value);
 	}
 
 	std::string OpenGLShader::ReadFile(const std::string& filepath)
 	{
+		HL_PROFILE_FUNCTION();
+
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in)
@@ -88,6 +104,8 @@ namespace Huiluna {
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string & source)
 	{
+		HL_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSources;
 
 		const char* typeToken = "#type";
@@ -112,6 +130,8 @@ namespace Huiluna {
 
 	void OpenGLShader::Compile(std::unordered_map<GLenum, std::string>& shaderSources)
 	{
+
+		HL_PROFILE_FUNCTION();
 
 		// Get a program object.
 		GLuint program = glCreateProgram();
@@ -191,6 +211,8 @@ namespace Huiluna {
 
 	void OpenGLShader::Bind() const
 	{
+		HL_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
