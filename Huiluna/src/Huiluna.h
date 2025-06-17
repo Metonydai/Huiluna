@@ -25,8 +25,3 @@
 #include "Huiluna/Renderer/VertexArray.h"
 
 #include "Huiluna/Renderer/OrthographicCamera.h"
-// ------------------------------------
-// 
-// ---Entry Point----------------------
-#include "Huiluna/Core/EntryPoint.h"
-// ------------------------------------
