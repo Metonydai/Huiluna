@@ -31,6 +31,7 @@ namespace Huiluna {
 
 	Application::~Application()
 	{
+		Renderer::Shutdown();
 	}
 
 	void Application::PushLayer(Layer* layer)

@@ -25,7 +25,7 @@ public:
 		};
 
 		Huiluna::Ref<Huiluna::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(Huiluna::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer = Huiluna::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		Huiluna::BufferLayout layout = {
 			{ Huiluna::ShaderDataType::Float3, "a_Position" },
@@ -37,7 +37,7 @@ public:
 
 		uint32_t indices[3] = { 0, 1, 2 };
 		Huiluna::Ref<Huiluna::IndexBuffer> indexBuffer;
-		indexBuffer.reset(Huiluna::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		indexBuffer = Huiluna::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA = Huiluna::VertexArray::Create();
@@ -50,7 +50,7 @@ public:
 		};
 
 		Huiluna::Ref<Huiluna::VertexBuffer> squareVB;
-		squareVB.reset(Huiluna::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = Huiluna::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 		squareVB->SetLayout({
 			{ Huiluna::ShaderDataType::Float3, "a_Position" },
@@ -62,7 +62,7 @@ public:
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 
 		Huiluna::Ref<Huiluna::IndexBuffer> squareIB;
-		squareIB.reset(Huiluna::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		squareIB = Huiluna::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 
 		m_SquareVA->SetIndexBuffer(squareIB);
 
