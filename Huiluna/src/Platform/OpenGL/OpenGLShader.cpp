@@ -59,6 +59,11 @@ namespace Huiluna {
 		UploadUniformInt(name, value);
 	}
 
+	void OpenGLShader::SetIntArray(const std::string& name, int* values, int count)
+	{
+		UploadUniformIntArray(name, values, count);
+	}
+
 	void OpenGLShader::SetFloat(const std::string& name, float value)
 	{
 		HL_PROFILE_FUNCTION();
@@ -232,6 +237,12 @@ namespace Huiluna {
 	{
 		GLint location = GetUniformLocation(name);
 		glUniform1i(location, value);
+	}
+
+	void OpenGLShader::UploadUniformIntArray(const std::string& name, int* values, int count)
+	{
+		GLint location = GetUniformLocation(name);
+		glUniform1iv(location, count, values);
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)

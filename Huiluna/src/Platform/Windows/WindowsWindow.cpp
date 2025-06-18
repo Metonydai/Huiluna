@@ -46,7 +46,7 @@ namespace Huiluna {
 		{
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
-			HL_CORE_ASSERT(success, "Could not intialize GLFW!");
+			HL_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallBack);
 			s_GLFWInitialized = true;
 		}

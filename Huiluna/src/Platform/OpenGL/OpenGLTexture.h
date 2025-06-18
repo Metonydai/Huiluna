@@ -19,6 +19,12 @@ namespace Huiluna {
 		virtual void SetData(void* data, uint32_t size) override;
 
 		virtual void Bind(uint32_t slot) const override;
+
+		virtual bool operator==(const Texture& other) const override
+		{ 
+			return this->m_RendererID == ((OpenGLTexture2D&)other).m_RendererID; 
+		}
+
 	private:
 		std::string m_Path;
 
