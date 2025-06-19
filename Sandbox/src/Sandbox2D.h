@@ -1,5 +1,6 @@
 #pragma once
 #include "Huiluna.h"
+#include "ParticleSystem.h"
 
 class Sandbox2D : public Huiluna::Layer
 {
@@ -20,5 +21,7 @@ private:
 	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture, m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
-
+	
+	ParticleSystem m_ParticleSystem;
+	ParticleProps m_Particle;
 };
