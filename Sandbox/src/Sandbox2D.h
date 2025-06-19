@@ -19,6 +19,8 @@ private:
 	Huiluna::OrthographicCameraController m_CameraController;
 	
 	Huiluna::Ref<Huiluna::Texture2D> m_MegamiTexture, m_CheckerboardTexture;
+	Huiluna::Ref<Huiluna::Texture2D> m_SpriteSheet;
+	Huiluna::Ref<Huiluna::SubTexture2D> m_TextureStairs, m_TextureBarrel, m_TextureTree;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 	

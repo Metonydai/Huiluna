@@ -18,7 +18,11 @@ void Sandbox2D::OnAttach()
 
 	m_MegamiTexture = Huiluna::Texture2D::Create("assets/textures/megami.jpg");
 	m_CheckerboardTexture = Huiluna::Texture2D::Create("assets/textures/Checkerboard.png");
-	
+	m_SpriteSheet = Huiluna::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
+	m_TextureStairs = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128, 128 });
+	m_TextureBarrel = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 2 }, { 128, 128 });
+	m_TextureTree = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 1 }, { 128, 128 }, { 1, 2 });
+
 	// Init here
 	m_Particle.ColorBegin = { 254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f };
 	m_Particle.ColorEnd = { 254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f };
@@ -49,6 +53,7 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 		Huiluna::RenderCommand::Clear();
 	}
 
+#if 0
 	{
 		static float rotation = 0.0f;
 		rotation += ts * 50.0f;
@@ -70,6 +75,13 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 		}
 		Huiluna::Renderer2D::EndScene();
 	}
+#endif
+
+	Huiluna::Renderer2D::BeginScene(m_CameraController.GetCamera());
+	Huiluna::Renderer2D::DrawQuad({ 0.0f, 0.0f }, { 1.0f, 1.0f }, m_TextureStairs);
+	Huiluna::Renderer2D::DrawQuad({ 1.0f, 0.0f }, { 1.0f, 1.0f }, m_TextureBarrel);
+	Huiluna::Renderer2D::DrawQuad({ -1.0f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
+	Huiluna::Renderer2D::EndScene();
 
 	if (Huiluna::Input::IsMouseButtonPressed(HL_MOUSE_BUTTON_LEFT))
 	{
