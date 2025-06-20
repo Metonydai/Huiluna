@@ -24,7 +24,7 @@ namespace Huiluna {
 
 		Renderer::Init();
 
-		ImGuiLayer* m_ImGuiLayer = new ImGuiLayer();
+		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 
 	}
@@ -58,11 +58,12 @@ namespace Huiluna {
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
 
-		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
+		for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); it++)
 		{
-			(*--it)->OnEvent(e);
 			if (e.Handled)
 				break;
+
+			(*it)->OnEvent(e);
 		}
 
 	}

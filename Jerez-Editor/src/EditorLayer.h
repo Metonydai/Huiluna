@@ -26,6 +26,7 @@ namespace Huiluna {
 		Ref<Texture2D> m_SpriteSheet;
 		Ref<SubTexture2D> m_TextureStairs, m_TextureBarrel, m_TextureTree;
 
+		bool m_ViewportFocused = false, m_ViewportHovered = false;
 		glm::vec2 m_ViewportSize = { 0, 0 };
 
 		glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
