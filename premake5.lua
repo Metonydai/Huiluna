@@ -25,6 +25,7 @@ IncludeDir["Glad"] = "Huiluna/vendor/Glad/include"
 IncludeDir["ImGui"] = "Huiluna/vendor/imgui"
 IncludeDir["glm"] = "Huiluna/vendor/glm"
 IncludeDir["stb_image"] = "Huiluna/vendor/stb_image"
+IncludeDir["entt"] = "Huiluna/vendor/entt/include"
 
 include "Huiluna/vendor/GLFW"
 include "Huiluna/vendor/Glad"
@@ -66,6 +67,7 @@ project "Huiluna"
         "%{IncludeDir.ImGui}",
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
+        "%{IncludeDir.entt}"
     }
 
     links
@@ -176,7 +178,8 @@ project "Jerez-Editor"
         "Huiluna/vendor/spdlog/include",
         "Huiluna/vendor/",
         "Huiluna/src",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}"
     }
 
     links

@@ -15,6 +15,10 @@
 
 #include "Huiluna/ImGui/ImGuiLayer.h"
 
+#include "Huiluna/Scene/Scene.h"
+#include "Huiluna/Scene/Entity.h"
+#include "Huiluna/Scene/Components.h"
+
 // ---Renderer-------------------------
 #include "Huiluna/Renderer/Renderer.h"
 #include "Huiluna/Renderer/Renderer2D.h"

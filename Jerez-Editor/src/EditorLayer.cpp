@@ -18,19 +18,32 @@ namespace Huiluna {
 	{
 		HL_PROFILE_FUNCTION();
 
-		Huiluna::FramebufferSpecification fbSpec;
+		FramebufferSpecification fbSpec;
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
-		m_Framebuffer = Huiluna::Framebuffer::Create(fbSpec);
+		m_Framebuffer = Framebuffer::Create(fbSpec);
 
-		m_MegamiTexture = Huiluna::Texture2D::Create("assets/textures/megami.jpg");
-		m_CheckerboardTexture = Huiluna::Texture2D::Create("assets/textures/Checkerboard.png");
-		m_SpriteSheet = Huiluna::Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
-		m_TextureStairs = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128, 128 });
-		m_TextureBarrel = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 2 }, { 128, 128 });
-		m_TextureTree = Huiluna::SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 1 }, { 128, 128 }, { 1, 2 });
+		m_MegamiTexture = Texture2D::Create("assets/textures/megami.jpg");
+		m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
+		m_SpriteSheet = Texture2D::Create("assets/game/textures/RPGpack_sheet_2X.png");
+		m_TextureStairs = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 7, 6 }, { 128, 128 });
+		m_TextureBarrel = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 8, 2 }, { 128, 128 });
+		m_TextureTree = SubTexture2D::CreateFromCoords(m_SpriteSheet, { 2, 1 }, { 128, 128 }, { 1, 2 });
 
 		//m_CameraController.SetZoomLevel(5.0);
+
+		m_ActiveScene = CreateRef<Scene>();
+
+		// Entity
+		Entity square = m_ActiveScene->CreateEntity("Square");
+		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.8, 0.3, 0.2, 1.0});
+		m_SquareEntity = square;
+	
+		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
+		m_CameraEntity.AddComponent<CameraComponent>(glm::ortho(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
+		m_SecondCamera = m_ActiveScene->CreateEntity("Camera B");
+		auto& cc = m_SecondCamera.AddComponent<CameraComponent>(glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f));
+		cc.Primary = false;
 	}
 
 	void EditorLayer::OnDetach()
@@ -38,7 +51,7 @@ namespace Huiluna {
 		HL_PROFILE_FUNCTION();
 	}
 
-	void EditorLayer::OnUpdate(Huiluna::Timestep ts)
+	void EditorLayer::OnUpdate(Timestep ts)
 	{
 		HL_PROFILE_FUNCTION();
 
@@ -47,35 +60,27 @@ namespace Huiluna {
 			m_CameraController.OnUpdate(ts);
 
 		// Render
-		Huiluna::Renderer2D::ResetStats();
+		Renderer2D::ResetStats();
 		{
-			HL_PROFILE_SCOPE("Renderer Prep");
 			m_Framebuffer->Bind();
-			Huiluna::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-			Huiluna::RenderCommand::Clear();
+			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+			RenderCommand::Clear();
 		}
 
+#if 0
 		{
-			static float rotation = 0.0f;
-			rotation += ts * 50.0f;
+			Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-			HL_PROFILE_SCOPE("Renderer Draw");
-			Huiluna::Renderer2D::BeginScene(m_CameraController.GetCamera());
-			Huiluna::Renderer2D::DrawRotateQuad({ 1.0f, 0.0f }, { 0.8f, 0.8f }, glm::radians(45.0f), { 0.8f, 0.2f, 0.3f, 1.0f });
-			Huiluna::Renderer2D::DrawQuad({ -1.0f, 0.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-			Huiluna::Renderer2D::DrawQuad({ 0.5f, -0.5f, 0.0f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-			Huiluna::Renderer2D::DrawQuad({ 0.0f, 0.0f, -0.1f }, { 20.0f, 20.0f }, m_CheckerboardTexture, 2.0f);
-			Huiluna::Renderer2D::DrawRotateQuad({ 0.0f, 0.0f, 0.1f }, { 1.0f, 1.0f }, glm::radians(rotation), m_MegamiTexture, 1.0f);
-			for (float y = -5.0f; y < 5.0f; y += 0.5f)
-			{
-				for (float x = -5.0f; x < 5.0f; x += 0.5f)
-				{
-					glm::vec4 color = { (x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f };
-					Huiluna::Renderer2D::DrawQuad({ x, y }, { 0.45f, 0.45f }, color);
-				}
-			}
-			Huiluna::Renderer2D::EndScene();
+			Renderer2D::DrawQuad({ 1.5f, 0.0f, 0.1f }, { 1.0f, 1.0f }, m_MegamiTexture, 1.0f);
+			// Update scene
+			m_ActiveScene->OnUpdate(ts);
+			
+			Renderer2D::EndScene();
 		}
+#endif
+
+		// Update scene
+		m_ActiveScene->OnUpdate(ts);
 
 		m_Framebuffer->Unbind();
 	}
@@ -143,7 +148,7 @@ namespace Huiluna {
 			{
 				// Disabling fullscreen would allow the window to be moved to the front of other windows,
 				// which we can't undo at the moment without finer window depth/z control.
-				if (ImGui::MenuItem("Exit")) Huiluna::Application::Get().Close();
+				if (ImGui::MenuItem("Exit")) Application::Get().Close();
 
 				ImGui::EndMenu();
 			}
@@ -153,16 +158,35 @@ namespace Huiluna {
 		{
 			ImGui::Begin("Settings");
 
-			auto stats = Huiluna::Renderer2D::GetStats();
+			auto stats = Renderer2D::GetStats();
 			ImGui::Text("Renderer2D Stats:");
 			ImGui::Text("Draw Calls: %d", stats.DrawCalls);
 			ImGui::Text("Quads: %d", stats.QuadCount);
 			ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
 			ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
-			ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+			
+			if (m_SquareEntity)
+			{
+				ImGui::Separator();
+				auto& tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
+				ImGui::Text("%s", tag.c_str());
+
+				auto& m_SquareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
+				ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+				ImGui::Separator();
+			}
+
+			ImGui::DragFloat3("Camera Transform", 
+				glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+			
+			if (ImGui::Checkbox("Camera A", &m_PrimaryCamera))
+			{
+				m_CameraEntity.GetComponent<CameraComponent>().Primary = m_PrimaryCamera;
+				m_SecondCamera.GetComponent<CameraComponent>().Primary = !m_PrimaryCamera;
+			}
+
 			ImGui::End();
 
-			
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 			ImGui::Begin("Viewport");
 			m_ViewportFocused = ImGui::IsWindowFocused();
@@ -186,7 +210,7 @@ namespace Huiluna {
 		ImGui::End();
 	}
 
-	void EditorLayer::OnEvent(Huiluna::Event& e)
+	void EditorLayer::OnEvent(Event& e)
 	{
 		m_CameraController.OnEvent(e);
 	}
