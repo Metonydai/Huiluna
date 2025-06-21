@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Huiluna/Core/Core.h"
+#include "Huiluna/Core/Base.h"
 #include "Huiluna/Events/Event.h"
 
 #include "Huiluna/Core/Timestep.h"

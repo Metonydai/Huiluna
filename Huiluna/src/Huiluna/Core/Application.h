@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Base.h"
 
 #include "Window.h"
 #include "LayerStack.h"
@@ -15,7 +15,7 @@ namespace Huiluna {
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Huiluna App");
 		virtual ~Application();
 
 		void Run();
@@ -27,6 +27,8 @@ namespace Huiluna {
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; };
+
+		void Close();
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);

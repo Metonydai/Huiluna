@@ -1,6 +1,6 @@
 workspace "Huiluna"
     architecture "x64"
-    startproject "Sandbox"
+    startproject "Jerez-Editor"
 
     configurations
     {
@@ -154,3 +154,55 @@ project "Sandbox"
         runtime "Release"
         optimize "on"
 
+
+project "Jerez-Editor"
+    location "Jerez-Editor"
+    kind "ConsoleApp"
+    language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "Huiluna/vendor/spdlog/include",
+        "Huiluna/vendor/",
+        "Huiluna/src",
+        "%{IncludeDir.glm}"
+    }
+
+    links
+    {
+        "Huiluna"
+    }
+
+    filter "system:windows"
+        systemversion "latest"
+
+        defines
+        {
+            "HL_PLATFORM_WINDOWS"
+        }
+
+    filter "configurations:Debug"
+        defines "HL_DEBUG"
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Release"
+        defines "HL_RELEASE"
+        runtime "Release"
+        optimize "on"
+
+    filter "configurations:Dist"
+        defines "HL_DIST"
+        runtime "Release"
+        optimize "on"

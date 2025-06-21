@@ -147,12 +147,12 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 	Huiluna::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureBarrel);
 	Huiluna::Renderer2D::DrawQuad({ -1.0f, 1.5f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
 	Huiluna::Renderer2D::EndScene();
+
 }
 
 void Sandbox2D::OnImGuiRender()
 {
 	HL_PROFILE_FUNCTION();
-
 	ImGui::Begin("Settings");
 
 	auto stats = Huiluna::Renderer2D::GetStats();
@@ -163,6 +163,7 @@ void Sandbox2D::OnImGuiRender()
 	ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
 	ImGui::End();
 }
 

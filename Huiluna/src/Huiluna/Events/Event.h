@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Huiluna/Core/Core.h"
+#include "Huiluna/Core/Base.h"
 
 #include <string>
 #include <functional>
