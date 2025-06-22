@@ -9,49 +9,8 @@
 
 namespace Huiluna {
 
-	static void DoMath(const glm::mat4& tansform)
-	{
-
-	}
-
-	static void OnTransformConstruct(entt::registry& registry, entt::entity entity)
-	{
-
-	}
-
 	Scene::Scene()
 	{
-#if ENTT_EXAMPLE_CODE 
-		TransformComponent transform;
-		DoMath(transform);
-
-		entt::entity entity = m_Registry.create();
-		m_Registry.emplace<TransformComponent>(entity, glm::mat4(1.0f));
-
-		m_Registry.on_construct<TransformComponent>().connect<&OnTransformConstruct>(this);
-		
-		if (m_Registry.all_of<TransformComponent>(entity))
-		{
-			TransformComponent& transform = m_Registry.get<TransformComponent>(entity);
-		}
-
-
-		//單一元件
-		auto view = m_Registry.view<TransformComponent>();
-		for (auto entity : view)
-		{
-			TransformComponent& transform = view.get<TransformComponent>(entity);
-		}
-
-
-		//多個元件
-		auto view = registry.view<Position, Velocity>();
-		for (auto [entity, pos, vel] : view.each()) {
-			pos.x += vel.dx;
-			pos.y += vel.dy;
-		}
-
-#endif
 	}
 
 	Scene::~Scene()
@@ -75,12 +34,12 @@ namespace Huiluna {
 			{
 				if (!nsc.Instance)
 				{
-					nsc.InstantiateFunction();
+					nsc.Instance = nsc.InstantiateScript();
 					nsc.Instance->m_Entity = Entity{ entity, this };
-					nsc.OnCreateFunction(nsc.Instance);
+					nsc.Instance->OnCreate();
 				}
 
-				nsc.OnUpdateFunction(nsc.Instance, ts);
+				nsc.Instance->OnUpdate(ts);
 			});
 		}
 
@@ -92,7 +51,7 @@ namespace Huiluna {
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
 			{
-				auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
+				const auto& [transform, camera] = view.get<TransformComponent, CameraComponent>(entity);
 				if (camera.Primary)
 				{
 					mainCamera = &camera.Camera;
@@ -109,7 +68,7 @@ namespace Huiluna {
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (auto entity : group)
 			{
-				auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+				const auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				Renderer2D::DrawQuad(transform, sprite.Color);
 			}

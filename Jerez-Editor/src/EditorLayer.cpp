@@ -51,12 +51,13 @@ namespace Huiluna {
 		public:
 			void OnCreate()
 			{
-				std::cout << "OnCreate HUIYU" << std::endl;
+				auto& transform = GetComponent<TransformComponent>().Transform;
+				transform[3][0] = rand() % 10 - 5.0f;
 			}
 
 			void OnDestroy()
 			{
-
+			
 			}
 
 			void OnUpdate(Timestep ts)
@@ -80,6 +81,7 @@ namespace Huiluna {
 
 		};
 
+		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 
 	}
