@@ -35,13 +35,17 @@ namespace Huiluna {
 		m_ActiveScene = CreateRef<Scene>();
 
 		// Entity
-		Entity square = m_ActiveScene->CreateEntity("Square");
+		Entity square = m_ActiveScene->CreateEntity("Red Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.8, 0.3, 0.2, 1.0});
+		
+		Entity square2 = m_ActiveScene->CreateEntity("Green Square");
+		square2.AddComponent<SpriteRendererComponent>(glm::vec4{0.3, 0.8, 0.2, 1.0 });
+		
 		m_SquareEntity = square;
 	
-		m_CameraEntity = m_ActiveScene->CreateEntity("Camera Entiy");
+		m_CameraEntity = m_ActiveScene->CreateEntity("Primary Camera Entiy");
 		m_CameraEntity.AddComponent<CameraComponent>();
-		m_SecondCamera = m_ActiveScene->CreateEntity("Clip-Space Entity");
+		m_SecondCamera = m_ActiveScene->CreateEntity("Secondary Camera Entiy");
 		auto& cc = m_SecondCamera.AddComponent<CameraComponent>();
 		cc.Primary = false;
 
