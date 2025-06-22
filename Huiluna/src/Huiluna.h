@@ -17,6 +17,7 @@
 
 #include "Huiluna/Scene/Scene.h"
 #include "Huiluna/Scene/Entity.h"
+#include "Huiluna/Scene/ScriptableEntity.h"
 #include "Huiluna/Scene/Components.h"
 
 // ---Renderer-------------------------

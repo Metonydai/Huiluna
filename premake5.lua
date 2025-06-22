@@ -125,7 +125,8 @@ project "Sandbox"
         "Huiluna/vendor/spdlog/include",
         "Huiluna/vendor/",
         "Huiluna/src",
-        "%{IncludeDir.glm}"
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.entt}"
     }
 
     links
