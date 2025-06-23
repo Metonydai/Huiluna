@@ -37,6 +37,7 @@ project "Huiluna"
     language "C++"
     cppdialect "C++17"
     staticruntime "on"
+    buildoptions { "/utf-8" }
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -110,6 +111,7 @@ project "Sandbox"
     language "C++"
     cppdialect "C++17"
     staticruntime "on"
+    buildoptions { "/utf-8" }
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -164,6 +166,7 @@ project "Jerez-Editor"
     language "C++"
     cppdialect "C++17"
     staticruntime "on"
+    buildoptions { "/utf-8" }
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")

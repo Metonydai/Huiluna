@@ -1,12 +1,13 @@
-[submodule "Huiluna/vendor/spdlog"]
-	path = Huiluna/vendor/spdlog
-	url = https://github.com/gabime/spdlog
-[submodule "Huiluna/vendor/imgui"]
-	path = Huiluna/vendor/imgui
-	url = https://github.com/ocornut/imgui
 [submodule "Huiluna/vendor/glm"]
 	path = Huiluna/vendor/glm
 	url = https://github.com/g-truc/glm
 [submodule "Huiluna/vendor/GLFW"]
 	path = Huiluna/vendor/GLFW
-	url = https://github.com/Metonydai/glfw
+	url = https://github.com/Metonydai/glfw.git
+[submodule "Huiluna/vendor/imgui"]
+	path = Huiluna/vendor/imgui
+	url = https://github.com/Metonydai/imgui.git
+	branch = docking
+[submodule "Huiluna/vendor/spdlog"]
+	path = Huiluna/vendor/spdlog
+	url = https://github.com/gabime/spdlog
