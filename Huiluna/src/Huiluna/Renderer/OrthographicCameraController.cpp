@@ -15,7 +15,7 @@ namespace Huiluna {
 	{
 		HL_PROFILE_FUNCTION();
 
-		m_CameraTranslationSpeed = m_ZoomLevel * 2.0;
+		m_CameraTranslationSpeed = m_ZoomLevel * 2.0f;
 
 		if (Input::IsKeyPressed(HL_KEY_A))
 			m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
