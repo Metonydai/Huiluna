@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Huiluna/Scene/SceneSerializer.h"
 
 namespace Huiluna {
 
@@ -34,6 +35,7 @@ namespace Huiluna {
 
 		m_ActiveScene = CreateRef<Scene>();
 
+#if 0
 		// Entity
 		Entity square = m_ActiveScene->CreateEntity("Red Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{0.8, 0.3, 0.2, 1.0});
@@ -87,8 +89,10 @@ namespace Huiluna {
 
 		m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
 		m_SecondCamera.AddComponent<NativeScriptComponent>().Bind<CameraController>();
+#endif
 
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
+
 	}
 
 	void EditorLayer::OnDetach()
@@ -209,6 +213,18 @@ namespace Huiluna {
 				// Disabling fullscreen would allow the window to be moved to the front of other windows,
 				// which we can't undo at the moment without finer window depth/z control.
 				if (ImGui::MenuItem("Exit")) Application::Get().Close();
+
+				if (ImGui::MenuItem("Serialize"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Serialize("assets/scenes/Example.hluna");
+				}
+
+				if (ImGui::MenuItem("Deserialize"))
+				{
+					SceneSerializer serializer(m_ActiveScene);
+					serializer.Deserialize("assets/scenes/Example.hluna");
+				}
 
 				ImGui::EndMenu();
 			}
