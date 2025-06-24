@@ -92,10 +92,10 @@ namespace Huiluna {
 }
 
 namespace fmt {
-	template <>
-	struct formatter<Huiluna::Event> : formatter<std::string> {
-		auto format(const Huiluna::Event& e, format_context& ctx) const {
-			return formatter<std::string>::format(e.ToString(), ctx);
+	template <typename T, typename Char>
+	struct formatter<T, Char, std::enable_if_t<std::is_base_of<Huiluna::Event, T>::value>> : formatter<std::string, Char> {
+		auto format(const T& e, format_context& ctx) const {
+			return formatter<std::string, Char>::format(e.ToString(), ctx);
 		}
 	};
 }
