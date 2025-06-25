@@ -20,7 +20,8 @@ project "Jerez-Editor"
         "%{wks.location}/Huiluna/vendor/",
         "%{wks.location}/Huiluna/src",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.entt}"
+        "%{IncludeDir.entt}",
+        "%{IncludeDir.ImGuizmo}"
     }
 
     links

@@ -14,3 +14,6 @@
 [submodule "Huiluna/vendor/yaml-cpp"]
 	path = Huiluna/vendor/yaml-cpp
 	url = https://github.com/thecherno/yaml-cpp
+[submodule "Huiluna/vendor/ImGuizmo"]
+	path = Huiluna/vendor/ImGuizmo
+	url = https://github.com/Metonydai/ImGuizmo.git

@@ -25,6 +25,7 @@ IncludeDir["glm"] = "%{wks.location}/Huiluna/vendor/glm"
 IncludeDir["stb_image"] = "%{wks.location}/Huiluna/vendor/stb_image"
 IncludeDir["entt"] = "%{wks.location}/Huiluna/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "%{wks.location}/Huiluna/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "%{wks.location}/Huiluna/vendor/ImGuizmo"
 
 group "Dependencis"
         include "Huiluna/vendor/GLFW"
