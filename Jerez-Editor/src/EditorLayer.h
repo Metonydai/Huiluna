@@ -2,6 +2,7 @@
 
 #include "Huiluna.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Huiluna/Renderer/EditorCamera.h"
 
 namespace Huiluna {
 
@@ -34,6 +35,8 @@ namespace Huiluna {
 		Entity m_SecondCamera;
 
 		bool m_PrimaryCamera = true;
+
+		EditorCamera m_EditorCamera;
 
 		Ref<Texture2D> m_MegamiTexture, m_CheckerboardTexture;
 		Ref<Texture2D> m_SpriteSheet;

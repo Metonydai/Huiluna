@@ -1,0 +1,74 @@
+Scene: Untitled
+Entities:
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Bot
+    TransformComponent:
+      Translation: [0, -0.5, 4.60317935e-08]
+      Rotation: [1.57079637, 0, 0]
+      Scale: [1, 0.999996603, 0.999996603]
+    SpriteRendererComponent:
+      Color: [0.390074402, 0.764478743, 0.348295361, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Left
+    TransformComponent:
+      Translation: [-0.5, 0, -2.98023224e-08]
+      Rotation: [0, 1.57079637, 0]
+      Scale: [0.999976277, 1, 0.999976277]
+    SpriteRendererComponent:
+      Color: [0.641600192, 0.99613899, 0.515376925, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Back
+    TransformComponent:
+      Translation: [0, 0, -0.5]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [1, 1, 1, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Front
+    TransformComponent:
+      Translation: [0, 0, 0.5]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.423529416, 1, 0, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Top
+    TransformComponent:
+      Translation: [0, 0.5, 0]
+      Rotation: [1.57079637, 0, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.501960814, 0.854901969, 0, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Right
+    TransformComponent:
+      Translation: [0.5, 0, 0]
+      Rotation: [0, 1.57079637, 0]
+      Scale: [1, 1, 1]
+    SpriteRendererComponent:
+      Color: [0.309803933, 0.513725519, 0.0196078438, 1]
+  - Entity: 12356423165
+    TagComponent:
+      Tag: Camera
+    TransformComponent:
+      Translation: [1.70000005, 1.5, 2.70000005]
+      Rotation: [-0.415388346, 0.56025064, 0.0209439509]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: -0.0554665625
+        PerspectiveNear: 188.009995
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      FixedAspectRatio: false
