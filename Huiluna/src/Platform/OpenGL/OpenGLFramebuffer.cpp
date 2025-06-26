@@ -205,7 +205,7 @@ namespace Huiluna {
 		HL_CORE_ASSERT(attachmentIndex < m_ColorAttachments.size(), "");
 
 		glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentIndex);
-		int pixelData;
+		int pixelData = -1;
 		glReadPixels(x, y, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
 		return pixelData;
 	}

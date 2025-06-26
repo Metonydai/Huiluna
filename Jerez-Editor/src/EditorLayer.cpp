@@ -157,9 +157,11 @@ namespace Huiluna {
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
-			HL_CORE_WARN("PixelData: {0}", pixelData);
-			HL_CORE_WARN("Mouse : {0}, {1}", mouseX, mouseY);
+			
+			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
 		}
+
+		HL_WARN("Mouse: {0}, {1}", mouseX, mouseY);
 
 		m_Framebuffer->Unbind();
 	}
@@ -243,6 +245,11 @@ namespace Huiluna {
 		{
 			ImGui::Begin("Stats");
 
+			std::string name = "None";
+			if (m_HoveredEntity)
+				name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
+			ImGui::Text("Hoverer Entity: %s", name.c_str());
+
 			auto stats = Renderer2D::GetStats();
 			ImGui::Text("Renderer2D Stats:");
 			ImGui::Text("Draw Calls: %d", stats.DrawCalls);
@@ -272,8 +279,9 @@ namespace Huiluna {
 			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
+			HL_WARN("ViewportSize: {0}, {1}", viewportPanelSize.x, viewportPanelSize.y);
 			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
-			ImGui::Image(textureID, viewportPanelSize, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+			ImGui::Image(textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 			// Gizmos
 			Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
