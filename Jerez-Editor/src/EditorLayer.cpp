@@ -25,6 +25,7 @@ namespace Huiluna {
 		HL_PROFILE_FUNCTION();
 
 		FramebufferSpecification fbSpec;
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
@@ -253,7 +254,7 @@ namespace Huiluna {
 			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
 			ImGui::Image(textureID, viewportPanelSize, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 			// Gizmos
@@ -386,6 +387,7 @@ namespace Huiluna {
 				break;
 			}
 		}
+		return false;
 	}
 
 	void EditorLayer::NewScene()
