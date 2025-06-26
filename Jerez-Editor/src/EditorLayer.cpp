@@ -25,7 +25,7 @@ namespace Huiluna {
 		HL_PROFILE_FUNCTION();
 
 		FramebufferSpecification fbSpec;
-		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth };
+		fbSpec.Attachments = { FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::RED_INTEGER, FramebufferTextureFormat::Depth };
 		fbSpec.Width = 1280;
 		fbSpec.Height = 720;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
@@ -154,6 +154,25 @@ namespace Huiluna {
 		// Update scene
 		m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
+		auto [mx, my] = ImGui::GetMousePos();
+		mx -= m_ViewportBounds[0].x;
+		my -= m_ViewportBounds[0].y;
+		glm::vec2 viewportSize = m_ViewportBounds[1] - m_ViewportBounds[0];
+		my = viewportSize.y - my;
+
+		int mouseX = (int)mx;
+		int mouseY = (int)my;
+		
+		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+		{
+			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+			HL_CORE_WARN("PixelData: {0}", pixelData);
+			HL_CORE_WARN("Mouse : {0}, {1}", mouseX, mouseY);
+		}
+		
+
+
+
 		m_Framebuffer->Unbind();
 	}
 
@@ -247,6 +266,17 @@ namespace Huiluna {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 			ImGui::Begin("Viewport");
+			auto viewportOffset = ImGui::GetCursorPos(); // Includes tab bar
+
+			auto windowSize = ImGui::GetWindowSize();
+			ImVec2 minBound = ImGui::GetWindowPos();
+
+			minBound.x += viewportOffset.x;
+			minBound.y += viewportOffset.y;
+			ImVec2 maxBound = { minBound.x + m_ViewportSize.x, minBound.y + m_ViewportSize.y };
+			m_ViewportBounds[0] = { minBound.x, minBound.y };
+			m_ViewportBounds[1] = { maxBound.x, maxBound.y };
+
 			m_ViewportFocused = ImGui::IsWindowFocused();
 			m_ViewportHovered = ImGui::IsWindowHovered();
 			Application::Get().GetImGuiLayer()->BlockEvents(!(m_ViewportFocused || m_ViewportHovered));
@@ -314,6 +344,7 @@ namespace Huiluna {
 		}
 
 		ImGui::End();
+
 	}
 
 	void EditorLayer::OnEvent(Event& e)
@@ -324,11 +355,6 @@ namespace Huiluna {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(HL_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
 
-		if (e.GetEventType() == EventType::KeyPressed)
-		{
-			KeyPressedEvent& ep = (KeyPressedEvent&)e;
-			HL_TRACE(ep);
-		}
 	}
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
