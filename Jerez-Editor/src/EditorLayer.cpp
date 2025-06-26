@@ -139,17 +139,8 @@ namespace Huiluna {
 			RenderCommand::Clear();
 		}
 
-#if 0
-		{
-			Renderer2D::BeginScene(m_CameraController.GetCamera());
-
-			Renderer2D::DrawQuad({ 1.5f, 0.0f, 0.1f }, { 1.0f, 1.0f }, m_MegamiTexture, 1.0f);
-			// Update scene
-			m_ActiveScene->OnUpdate(ts);
-			
-			Renderer2D::EndScene();
-		}
-#endif
+		// Clear out entity ID attachment to  -1
+		m_Framebuffer->ClearAttachment(1, -1);
 
 		// Update scene
 		m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
@@ -169,9 +160,6 @@ namespace Huiluna {
 			HL_CORE_WARN("PixelData: {0}", pixelData);
 			HL_CORE_WARN("Mouse : {0}, {1}", mouseX, mouseY);
 		}
-		
-
-
 
 		m_Framebuffer->Unbind();
 	}
