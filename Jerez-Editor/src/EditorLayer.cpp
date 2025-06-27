@@ -133,11 +133,10 @@ namespace Huiluna {
 
 		// Render
 		Renderer2D::ResetStats();
-		{
-			m_Framebuffer->Bind();
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-			RenderCommand::Clear();
-		}
+		
+		m_Framebuffer->Bind();
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommand::Clear();
 
 		// Clear out entity ID attachment to  -1
 		m_Framebuffer->ClearAttachment(1, -1);
@@ -276,7 +275,7 @@ namespace Huiluna {
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
 			//HL_WARN("ViewportSize: {0}, {1}", viewportPanelSize.x, viewportPanelSize.y);
-			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
+			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
 			ImGui::Image(textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
 			// Gizmos
@@ -346,7 +345,7 @@ namespace Huiluna {
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(HL_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
-
+		dispatcher.Dispatch<MouseButtonPressedEvent>(HL_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
 	}
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
@@ -408,6 +407,17 @@ namespace Huiluna {
 		return false;
 	}
 
+	bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+	{
+		if (e.GetMouseButton() == Mouse::ButtonLeft && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
+		{
+			if (m_ViewportHovered)
+				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
+		}
+		return false;
+	}
+
+
 	void EditorLayer::NewScene()
 	{
 		m_ActiveScene = CreateRef<Scene>();
@@ -426,6 +436,7 @@ namespace Huiluna {
 
 			SceneSerializer serializer(m_ActiveScene);
 			serializer.Deserialize(filepath);
+
 		}
 	}
 

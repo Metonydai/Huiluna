@@ -93,12 +93,12 @@ namespace Huiluna {
 	OpenGLFramebuffer::OpenGLFramebuffer(const FramebufferSpecification& spec)
 		: m_Specification(spec)
 	{
-		for (auto format : m_Specification.Attachments.Attachments)
+		for (auto spec : m_Specification.Attachments.Attachments)
 		{
-			if (!Utils::IsDepthFormat(format.TextureFormat))
-				m_ColorAttachmentSpecifications.emplace_back(format);
+			if (!Utils::IsDepthFormat(spec.TextureFormat))
+				m_ColorAttachmentSpecifications.emplace_back(spec);
 			else
-				m_DepthAttachmentSpecification = format.TextureFormat;
+				m_DepthAttachmentSpecification = spec;
 		}
 
 		Invalidate();
