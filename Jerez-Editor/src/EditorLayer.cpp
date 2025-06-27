@@ -153,15 +153,13 @@ namespace Huiluna {
 
 		int mouseX = (int)mx;
 		int mouseY = (int)my;
-		
+
 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
 		{
 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
 			
 			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
 		}
-
-		HL_WARN("Mouse: {0}, {1}", mouseX, mouseY);
 
 		m_Framebuffer->Unbind();
 	}
@@ -261,16 +259,14 @@ namespace Huiluna {
 
 			ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 			ImGui::Begin("Viewport");
-			auto viewportOffset = ImGui::GetCursorPos(); // Includes tab bar
-
+			auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+			auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+			auto viewportOffset = ImGui::GetWindowPos();
 			auto windowSize = ImGui::GetWindowSize();
 			ImVec2 minBound = ImGui::GetWindowPos();
 
-			minBound.x += viewportOffset.x;
-			minBound.y += viewportOffset.y;
-			ImVec2 maxBound = { minBound.x + m_ViewportSize.x, minBound.y + m_ViewportSize.y };
-			m_ViewportBounds[0] = { minBound.x, minBound.y };
-			m_ViewportBounds[1] = { maxBound.x, maxBound.y };
+			m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+			m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
 
 			m_ViewportFocused = ImGui::IsWindowFocused();
 			m_ViewportHovered = ImGui::IsWindowHovered();
@@ -279,7 +275,7 @@ namespace Huiluna {
 			ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
 			m_ViewportSize = { viewportPanelSize.x, viewportPanelSize.y };
 
-			HL_WARN("ViewportSize: {0}, {1}", viewportPanelSize.x, viewportPanelSize.y);
+			//HL_WARN("ViewportSize: {0}, {1}", viewportPanelSize.x, viewportPanelSize.y);
 			uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
 			ImGui::Image(textureID, ImVec2{ m_ViewportSize.x, m_ViewportSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
 
@@ -292,7 +288,7 @@ namespace Huiluna {
 
 				float windowWidth = (float)ImGui::GetWindowWidth();
 				float windowHeight = (float)ImGui::GetWindowHeight();
-				ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+				ImGuizmo::SetRect(m_ViewportBounds[0].x, m_ViewportBounds[0].y, m_ViewportBounds[1].x - m_ViewportBounds[0].x, m_ViewportBounds[1].y - m_ViewportBounds[0].y);
 
 				// Camera
 				
