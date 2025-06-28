@@ -9,8 +9,8 @@ namespace Huiluna {
 	class JerezEditor : public Application
 	{
 	public:
-		JerezEditor()
-			: Application("Jerez-Editor")
+		JerezEditor(ApplicationCommandLineArgs args)
+			: Application("Jerez-Editor", args)
 		{
 			PushLayer(new EditorLayer());
 		}
@@ -21,8 +21,8 @@ namespace Huiluna {
 		}
 	};
 
-	Application* CreateApplication()
+	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new JerezEditor();
+		return new JerezEditor(args);
 	}
 }

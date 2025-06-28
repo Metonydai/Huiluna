@@ -12,10 +12,23 @@
 #include "Huiluna/ImGui/ImGuiLayer.h"
 
 namespace Huiluna {
+
+	struct ApplicationCommandLineArgs
+	{
+		int Count = 0;
+		char** Args = nullptr;
+
+		const char* operator[](int index) const
+		{
+			HL_CORE_ASSERT(index < Count, "");
+			return Args[index];
+		}
+	};
+
 	class Application
 	{
 	public:
-		Application(const std::string& name = "Huiluna App");
+		Application(const std::string& name = "Huiluna App", ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
 		virtual ~Application();
 
 		void Run();
@@ -25,8 +38,11 @@ namespace Huiluna {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; };
+		
+		inline static Application& Get() { return *s_Instance; }
+
+		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
 
 		void Close();
 
@@ -35,6 +51,7 @@ namespace Huiluna {
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 	private:
+		ApplicationCommandLineArgs m_CommandLineArgs;
 		Scope<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true, m_Minimized = false;
@@ -45,5 +62,5 @@ namespace Huiluna {
 	};
 
 	// To be defined in CLIENT
-	Application* CreateApplication();
+	Application* CreateApplication(ApplicationCommandLineArgs args);
 }
