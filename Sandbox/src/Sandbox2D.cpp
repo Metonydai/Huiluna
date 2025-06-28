@@ -81,7 +81,6 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 		Huiluna::RenderCommand::Clear();
 	}
 
-#if 0
 	{
 		static float rotation = 0.0f;
 		rotation += ts * 50.0f;
@@ -103,10 +102,9 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 		}
 		Huiluna::Renderer2D::EndScene();
 	}
-#endif
 
 
-	if (Huiluna::Input::IsMouseButtonPressed(HL_MOUSE_BUTTON_LEFT))
+	if (Huiluna::Input::IsMouseButtonPressed(Huiluna::Mouse::ButtonLeft))
 	{
 		auto [x, y] = Huiluna::Input::GetMousePosition();
 		auto width = Huiluna::Application::Get().GetWindow().GetWidth();
@@ -125,6 +123,7 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
 
 
+#if 0
 	Huiluna::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 	for (uint32_t y = 0; y < m_MapHeight; y++)
@@ -137,17 +136,19 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 				texture = s_TextureMap[tileType];
 			else
 				texture = m_TextureBarrel;
-
+	
 			Huiluna::Renderer2D::DrawQuad({ x - m_MapWidth / 2.0f, y - m_MapHeight / 2.0f, 0.1f }, { 1.0f, 1.0f }, texture);
-
+	
 		}
 	}
-
+	
 	Huiluna::Renderer2D::DrawQuad({ 0.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureStairs);
 	Huiluna::Renderer2D::DrawQuad({ 1.0f, 0.0f, 0.5f }, { 1.0f, 1.0f }, m_TextureBarrel);
 	Huiluna::Renderer2D::DrawQuad({ -1.0f, 1.5f, 0.5f }, { 1.0f, 2.0f }, m_TextureTree);
-	Huiluna::Renderer2D::EndScene();
+	Huiluna::Renderer2D::DrawQuad({ -1.0f, 1.5f, 0.5f }, { 1.0f, 2.0f }, { 1.0f, 1.0f, 1.0f, 1.0 });
 
+	Huiluna::Renderer2D::EndScene();
+#endif
 }
 
 void Sandbox2D::OnImGuiRender()
