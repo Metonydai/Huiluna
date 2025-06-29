@@ -2,6 +2,8 @@
 
 #include "Huiluna.h"
 #include "Panels/SceneHierarchyPanel.h"
+#include "Panels/ContentBrowserPanel.h"
+
 #include "Huiluna/Renderer/EditorCamera.h"
 
 namespace Huiluna {
@@ -52,5 +54,6 @@ namespace Huiluna {
 
 		// Panels
 		SceneHierarchyPanel m_SceneHierarchyPanel;
+		ContentBrowserPanel m_ContentBrowserPanel;
 	};
 }
