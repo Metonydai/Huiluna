@@ -58,15 +58,15 @@ Entities:
     TagComponent:
       Tag: Camera
     TransformComponent:
-      Translation: [1.70000005, 1.5, 2.70000005]
-      Rotation: [-0.415388346, 0.56025064, 0.0209439509]
-      Scale: [1, 1, 1]
+      Translation: [-0.300000012, -2, 3.88000011]
+      Rotation: [0.504400134, -0.0349065848, 0]
+      Scale: [1.00000095, 1, 1.00000095]
     CameraComponent:
       Camera:
         ProjectionType: 0
-        PerspectiveFOV: -0.0554665625
-        PerspectiveNear: 188.009995
-        PerspectiveFar: 1000
+        PerspectiveFOV: 0.785398185
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 466
         OrthographicSize: 10
         OrthographicNear: -1
         OrthographicFar: 1

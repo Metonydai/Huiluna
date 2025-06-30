@@ -92,7 +92,6 @@ namespace Huiluna {
 			const auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
-			//std::cout << "EntityID: " << (int)entity << std::endl;
 		}
 
 		Renderer2D::EndScene();
