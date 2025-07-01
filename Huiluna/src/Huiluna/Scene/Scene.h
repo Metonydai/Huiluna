@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Huiluna/Core/Timestep.h"
+#include "Huiluna/Core/UUID.h"
 #include "Huiluna/Renderer/EditorCamera.h"
 
 #include "entt.hpp"
@@ -18,6 +19,7 @@ namespace Huiluna {
 		~Scene();
 
 		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
 		void OnRuntimeStart();

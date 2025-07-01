@@ -1,16 +1,24 @@
 #pragma once
 
+#include "SceneCamera.h"
+#include "Huiluna/Renderer/Texture.h" 
+#include "Huiluna/Core/UUID.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "SceneCamera.h"
-#include "ScriptableEntity.h"
-#include "Huiluna/Renderer/Texture.h" 
-
 namespace Huiluna {
+
+	struct IDComponent
+	{
+		UUID ID;
+
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
 
 	struct TagComponent
 	{
@@ -66,6 +74,8 @@ namespace Huiluna {
 		CameraComponent(const CameraComponent&) = default;
 	};
 
+	// Forward declaration here
+	class ScriptableEntity;
 	struct NativeScriptComponent
 	{
 		ScriptableEntity* Instance = nullptr;
