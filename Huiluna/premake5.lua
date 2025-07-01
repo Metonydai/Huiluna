@@ -31,6 +31,7 @@ project "Huiluna"
     {
         "src",
         "vendor/spdlog/include",
+        "%{IncludeDir.Box2D}",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.ImGui}",
@@ -45,6 +46,7 @@ project "Huiluna"
     links
     {
         "GLFW",
+        "Box2D",
         "Glad",
         "ImGui",
         "yaml-cpp",

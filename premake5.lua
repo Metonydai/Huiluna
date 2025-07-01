@@ -20,6 +20,7 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 group "Dependencis"
         include "Huiluna/vendor/GLFW"
+        include "Huiluna/vendor/Box2D"
         include "Huiluna/vendor/Glad"
         include "Huiluna/vendor/imgui"
         include "Huiluna/vendor/yaml-cpp"
