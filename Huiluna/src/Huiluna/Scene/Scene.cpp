@@ -249,6 +249,7 @@ namespace Huiluna {
 				const auto& [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+				Renderer2D::DrawRect(transform.GetTransform(), {1.0f, 1.0f, 1.0f, 1.0f}, (int)entity);
 			}
 		}
 		// Draw circles
@@ -261,7 +262,7 @@ namespace Huiluna {
 				Renderer2D::DrawCircle(transform.GetTransform(), circle.Color, circle.Thickness, circle.Fade, (int)entity);
 			}
 		}
-
+		
 		Renderer2D::EndScene();
 	}
 
