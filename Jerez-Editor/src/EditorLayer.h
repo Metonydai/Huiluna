@@ -23,6 +23,8 @@ namespace Huiluna {
 	private:
 		bool OnKeyPressed(KeyPressedEvent& e);
 		bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+		
+		void OnOverlayRender();
 
 		void NewScene();
 		void OpenScene();
@@ -66,6 +68,8 @@ namespace Huiluna {
 		glm::vec2 m_ViewportSize = { 0, 0 };
 		glm::vec2 m_ViewportBounds[2];
 		int m_GizmoType = -1;
+
+		bool m_ShowPhysicsColliders = false;
 
 		// Editor resources
 		Ref<Texture2D> m_IconPlay;
