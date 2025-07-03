@@ -35,6 +35,7 @@ namespace Huiluna {
 		void SerializeScene(Ref<Scene> scene, const std::filesystem::path& path);
 
 		void OnScenePlay();
+		void OnSceneSimulate();
 		void OnSceneStop();
 
 		void OnDuplicateEntity();
@@ -73,11 +74,12 @@ namespace Huiluna {
 
 		// Editor resources
 		Ref<Texture2D> m_IconPlay;
+		Ref<Texture2D> m_IconSimulate;
 		Ref<Texture2D> m_IconStop;
 
 		enum class SceneState
 		{
-			Edit = 0, Play = 1
+			Edit = 0, Play = 1, Simulate = 2
 		};
 
 		// Panels
