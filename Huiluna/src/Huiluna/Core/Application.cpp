@@ -3,6 +3,7 @@
 
 #include "Huiluna/Core/Input.h"
 #include "Huiluna/Renderer/Renderer.h"
+#include "Huiluna/Scripting/ScriptEngine.h"
 
 #include <GLFW/glfw3.h>
 
@@ -22,6 +23,7 @@ namespace Huiluna {
 		m_Window->SetEventCallback(HL_BIND_EVENT_FN(OnEvent));
 
 		Renderer::Init();
+		ScriptEngine::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -30,6 +32,7 @@ namespace Huiluna {
 
 	Application::~Application()
 	{
+		ScriptEngine::Shutdown();
 		Renderer::Shutdown();
 	}
 

@@ -38,6 +38,7 @@ project "Huiluna"
         "%{IncludeDir.glm}",
         "%{IncludeDir.stb_image}",
         "%{IncludeDir.entt}",
+        "%{IncludeDir.mono}",
         "%{IncludeDir.yaml_cpp}",
         "%{IncludeDir.ImGuizmo}",
         "%{IncludeDir.VulkanSDK}"
@@ -50,7 +51,9 @@ project "Huiluna"
         "Glad",
         "ImGui",
         "yaml-cpp",
-        "opengl32.lib"
+        "opengl32.lib",
+
+         "%{Library.mono}"
     }
     
     filter "files:vendor/ImGuizmo/**.cpp"
@@ -64,6 +67,14 @@ project "Huiluna"
             "HL_PLATFORM_WINDOWS",
             "HL_BUILD_DLL",
             "GLFW_INCLUDE_NONE"
+        }
+
+        links
+        {
+             "%{Library.WinSock}",
+             "%{Library.WinMM}",
+             "%{Library.WinVersion}",
+             "%{Library.BCrypt}"
         }
 
     filter "configurations:Debug"

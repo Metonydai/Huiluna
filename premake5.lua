@@ -26,6 +26,15 @@ group "Dependencis"
         include "Huiluna/vendor/yaml-cpp"
 group ""
 
-include "Huiluna"
-include "Sandbox"
-include "Jerez-Editor"
+group "Core"
+    include "Huiluna"
+    include "Huiluna-ScriptCore"
+group ""
+
+group "Tools"
+    include "Jerez-Editor"    
+group ""
+
+group "Misc"
+    include "Sandbox"
+group ""
