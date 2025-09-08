@@ -2,6 +2,8 @@
 
 #include "Huiluna/Scene/Components.h"
 
+#include "Huiluna/Scripting/ScriptEngine.h"
+
 #include "imgui/imgui.h"
 #include "imgui/imgui_internal.h"
 
@@ -212,6 +214,7 @@ namespace Huiluna {
 		}
 	}
 
+	
 	void SceneHierarchyPanel::DrawComponents(Entity entity)
 	{
 		if (entity.HasComponent<TagComponent>())
@@ -237,60 +240,14 @@ namespace Huiluna {
 
 		if (ImGui::BeginPopup("AddComponent"))
 		{
-			if (!m_SelectionContext.HasComponent<CameraComponent>())
-			{
-				if (ImGui::MenuItem("Camera"))
-				{
-					m_SelectionContext.AddComponent<CameraComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
+			DisplayAddComponentEntity<CameraComponent>("Camera");
+			DisplayAddComponentEntity<ScriptComponent>("Script");
+			DisplayAddComponentEntity<SpriteRendererComponent>("Sprite Renderer");
+			DisplayAddComponentEntity<CircleRendererComponent>("Circle Renderer");
+			DisplayAddComponentEntity<Rigidbody2DComponent>("Rigidbody 2D");
+			DisplayAddComponentEntity<BoxCollider2DComponent>("Box Collider 2D");
+			DisplayAddComponentEntity<CircleCollider2DComponent>("Circle Collider 2D");
 			
-			if (!m_SelectionContext.HasComponent<SpriteRendererComponent>())
-			{
-				if (ImGui::MenuItem("Sprite Renderer"))
-				{
-					m_SelectionContext.AddComponent<SpriteRendererComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
-			if (!m_SelectionContext.HasComponent<CircleRendererComponent>())
-			{
-				if (ImGui::MenuItem("Circle Renderer"))
-				{
-					m_SelectionContext.AddComponent<CircleRendererComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
-			if (!m_SelectionContext.HasComponent<Rigidbody2DComponent>())
-			{
-				if (ImGui::MenuItem("Rigidbody 2D"))
-				{
-					m_SelectionContext.AddComponent<Rigidbody2DComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
-			if (!m_SelectionContext.HasComponent<BoxCollider2DComponent>())
-			{
-				if (ImGui::MenuItem("Box Collider 2D"))
-				{
-					m_SelectionContext.AddComponent<BoxCollider2DComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
-			if (!m_SelectionContext.HasComponent<CircleCollider2DComponent>())
-			{
-				if (ImGui::MenuItem("Circle Collider 2D"))
-				{
-					m_SelectionContext.AddComponent<CircleCollider2DComponent>();
-					ImGui::CloseCurrentPopup();
-				}
-			}
-
 			ImGui::EndPopup();
 		}
 		ImGui::PopItemWidth();
@@ -360,6 +317,25 @@ namespace Huiluna {
 
 				ImGui::Checkbox("Fixed Aspect Ratio", &component.FixedAspectRatio);
 			}
+		});
+
+		DrawComponent<ScriptComponent>("Script", entity, [](auto& component)
+		{
+			bool scriptClassExists = ScriptEngine::EntityClassExists(component.ClassName);
+
+			char buffer[64];
+			strcpy_s(buffer, component.ClassName.c_str());
+
+			if (!scriptClassExists)
+				ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.2f, 0.3f, 1.0f));
+
+			if (ImGui::InputText("Class", buffer, sizeof(buffer)))
+			{
+				component.ClassName = buffer;
+			};
+
+			if (!scriptClassExists)
+				ImGui::PopStyleColor();
 		});
 
 		DrawComponent<SpriteRendererComponent>("Sprite Renderer", entity, [](auto& component)
@@ -440,4 +416,18 @@ namespace Huiluna {
 			ImGui::DragFloat("RestitutionThreshold", &component.RestitutionThreshold, 0.01f, 0.0f);
 		});
 	}
+
+	template<typename T>
+	void SceneHierarchyPanel::DisplayAddComponentEntity(const std::string& title)
+	{
+		if (!m_SelectionContext.HasComponent<T>())
+		{
+			if (ImGui::MenuItem(title.c_str()))
+			{
+				m_SelectionContext.AddComponent<T>();
+				ImGui::CloseCurrentPopup();
+			}
+		}
+	}
+
 }

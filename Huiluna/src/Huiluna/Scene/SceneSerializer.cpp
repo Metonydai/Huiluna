@@ -189,6 +189,16 @@ namespace Huiluna {
 			out << YAML::EndMap; // CameraComponent
 		}
 
+		if (entity.HasComponent<ScriptComponent>())
+		{
+			auto& scriptComponent = entity.GetComponent<ScriptComponent>();
+
+			out << YAML::Key << "ScriptComponent";
+			out << YAML::BeginMap; // ScriptComponent
+			out << YAML::Key << "ClassName" << YAML::Value << scriptComponent.ClassName;
+			out << YAML::EndMap; // ScriptComponent
+		}
+
 		if (entity.HasComponent<SpriteRendererComponent>())
 		{
 			out << YAML::Key << "SpriteRendererComponent";
@@ -227,7 +237,7 @@ namespace Huiluna {
 			out << YAML::Key << "BodyType" << YAML::Value << Rigidbody2DBodyTypeToString(rb2dComponent.Type);
 			out << YAML::Key << "FixedRotation" << YAML::Value << rb2dComponent.FixedRotation;
 
-			out << YAML::EndMap; // SpriteRendererComponent
+			out << YAML::EndMap; // Rigidbody2DComponent
 		}
 
 		if (entity.HasComponent<BoxCollider2DComponent>())
@@ -355,6 +365,13 @@ namespace Huiluna {
 
 					cc.Primary = cameraComponent["Primary"].as<bool>();
 					cc.FixedAspectRatio = cameraComponent["FixedAspectRatio"].as<bool>();
+				}
+
+				auto scriptComponent = entity["ScriptComponent"];
+				if (scriptComponent)
+				{
+					auto& sc = deserializedEntity.AddComponent<ScriptComponent>();
+					sc.ClassName = scriptComponent["ClassName"].as<std::string>();
 				}
 
 				auto spriteRendererComponent = entity["SpriteRendererComponent"];

@@ -20,6 +20,9 @@ namespace Huiluna {
 		Entity GetSelectedEntity() const { return m_SelectionContext; }
 		void SetSelectedEntity(Entity entity);
 	private:
+		template<typename T>
+		void DisplayAddComponentEntity(const std::string& title);
+
 		void DrawEntityNode(Entity entity);
 		void DrawComponents(Entity entity);
 	private:

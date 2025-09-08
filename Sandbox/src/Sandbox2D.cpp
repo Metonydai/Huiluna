@@ -81,6 +81,7 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 		Huiluna::RenderCommand::Clear();
 	}
 
+#if 0
 	{
 		static float rotation = 0.0f;
 		rotation += ts * 50.0f;
@@ -121,9 +122,10 @@ void Sandbox2D::OnUpdate(Huiluna::Timestep ts)
 
 	m_ParticleSystem.OnUpdate(ts);
 	m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+#endif
 
 
-#if 0
+#if 1
 	Huiluna::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
 	for (uint32_t y = 0; y < m_MapHeight; y++)

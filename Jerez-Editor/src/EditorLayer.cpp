@@ -580,7 +580,7 @@ namespace Huiluna {
 					Renderer2D::DrawCircle(transform, glm::vec4(0, 1, 0, 1), 0.01f);
 				}
 			}
-		}
+		} 
 
 		Renderer2D::EndScene();
 	}
@@ -589,6 +589,7 @@ namespace Huiluna {
 	void EditorLayer::NewScene()
 	{
 		m_ActiveScene = CreateRef<Scene>();
+		m_EditorScene = m_ActiveScene;
 		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 		m_EditorScenePath = std::filesystem::path();
